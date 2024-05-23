@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AllRecipeListActivity extends AppCompatActivity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_recipe_list);
@@ -13,5 +14,6 @@ public class AllRecipeListActivity extends AppCompatActivity {
     }
 
     private void initLayoutComponents() {
+
     }
 }
