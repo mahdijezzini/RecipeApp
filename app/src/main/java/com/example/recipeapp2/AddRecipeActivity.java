@@ -46,7 +46,11 @@ public class AddRecipeActivity extends AppCompatActivity {
                     RecipeDataSource dataSource=new RecipeDataSource(AddRecipeActivity.this);
                     dataSource.open();
                     if(dataSource.insertRecipe(currentRecipe)){
-                        Toast.makeText(AddRecipeActivity.this,"Recipe added successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddRecipeActivity.this,"Recipe added", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(AddRecipeActivity.this,AllRecipeListActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("username",currentRecipe.getUsername());
+                        startActivity(intent);
                     }else {
                         Toast.makeText(AddRecipeActivity.this,"Error saving recipe", Toast.LENGTH_SHORT).show();
                     }
