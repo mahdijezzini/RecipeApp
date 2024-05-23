@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +35,24 @@ public class AddRecipeActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 currentRecipe.setRecipeName(recipeNameEditText.getText().toString());
                 currentRecipe.setIngredients(ingredientsEditText.getText().toString());
                 currentRecipe.setSteps(stepsEditText.getText().toString());
+                if(     currentRecipe.getRecipeName().length()>1
+                        && currentRecipe.getIngredients().length()>1
+                        && currentRecipe.getSteps().length()>1
+                ){
+                    RecipeDataSource dataSource=new RecipeDataSource(AddRecipeActivity.this);
+                    dataSource.open();
+                    if(dataSource.insertRecipe(currentRecipe)){
+                        Toast.makeText(AddRecipeActivity.this,"Recipe added successfully", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(AddRecipeActivity.this,"Error saving recipe", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(AddRecipeActivity.this,"Fill empty fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

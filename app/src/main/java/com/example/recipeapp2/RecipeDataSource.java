@@ -96,7 +96,7 @@ public class RecipeDataSource  {
         boolean didSucceed=false;
         try {
             ContentValues initialValues = new ContentValues();
-            initialValues.put("recipeId", recipe.getRecipeId());
+
             initialValues.put("name", recipe.getRecipeName());
             initialValues.put("ingredients", recipe.getIngredients());
             initialValues.put("steps", recipe.getSteps());
@@ -107,7 +107,7 @@ public class RecipeDataSource  {
                 initialValues.put("contactphoto", photo);
             }
             initialValues.put("username", recipe.getUsername());
-            didSucceed = database.insert("user", null, initialValues) > 0;
+            didSucceed = database.insert("recipe", null, initialValues) > 0;
         }catch (Exception e) {
             Log.d("My Database", "Something went wrong!");
         }
