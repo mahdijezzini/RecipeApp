@@ -61,52 +61,52 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageViewContact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/recipeImageView"
+                android:layout_width="76dp"
+                android:layout_height="105dp"
+                android:contentDescription="@string/food_photo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/person"
-                android:contentDescription="@string/food_photo"/>
+                app:srcCompat="@drawable/lunch_dining" />
 
             <TextView
-                android:id="@+id/textContact"
+                android:id="@+id/nameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/name"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewContact" />
+                app:layout_constraintTop_toBottomOf="@id/recipeImageView" />
 
             <EditText
-                android:id="@+id/editName"
+                android:id="@+id/recipeNameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="16"
-                android:hint="@string/enter_name"
+                android:hint="@string/enterrecipename"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName|textCapWords"
                 android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="@+id/textContact"
-                app:layout_constraintTop_toBottomOf="@+id/textContact">
+                app:layout_constraintStart_toStartOf="@+id/nameText"
+                app:layout_constraintTop_toBottomOf="@+id/nameText">
 
                 <requestFocus />
             </EditText>
 
             <TextView
-                android:id="@+id/textAddress"
+                android:id="@+id/ingredientsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/ingridients"
-                app:layout_constraintStart_toStartOf="@+id/editName"
-                app:layout_constraintTop_toBottomOf="@id/editName" />
+                app:layout_constraintStart_toStartOf="@+id/recipeNameEditText"
+                app:layout_constraintTop_toBottomOf="@id/recipeNameEditText" />
 
             <EditText
-                android:id="@+id/editAddress"
+                android:id="@+id/ingredientsEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -115,8 +115,8 @@
                 android:imeOptions="actionNext"
                 android:inputType="text|textPersonName|textCapWords"
                 android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="@+id/textAddress"
-                app:layout_constraintTop_toBottomOf="@id/textAddress" />
+                app:layout_constraintStart_toStartOf="@+id/ingredientsText"
+                app:layout_constraintTop_toBottomOf="@id/ingredientsText" />
 
             <TextView
                 android:id="@+id/textView"
@@ -124,8 +124,8 @@
                 android:layout_height="28dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/steps"
-                app:layout_constraintStart_toStartOf="@+id/editAddress"
-                app:layout_constraintTop_toBottomOf="@+id/editAddress" />
+                app:layout_constraintStart_toStartOf="@+id/ingredientsEditText"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsEditText" />
 
             <EditText
                 android:id="@+id/editTextRecipeSteps"
@@ -145,6 +145,17 @@
                 android:textColorHint="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="46dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="76dp"
+                android:background="@drawable/round_button"
+                app:layout_constraintStart_toStartOf="@+id/recipeImageView"
+                app:layout_constraintTop_toTopOf="@+id/recipeImageView"
+                app:srcCompat="@drawable/photo_camera" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
