@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
 
 public class RecipeDataSource  {
 
@@ -89,6 +92,27 @@ public class RecipeDataSource  {
         return didSucceed;
     }
 
+    public boolean insertRecipe(Recipe recipe){
+        boolean didSucceed=false;
+        try {
+            ContentValues initialValues = new ContentValues();
+            initialValues.put("recipeId", recipe.getRecipeId());
+            initialValues.put("name", recipe.getRecipeName());
+            initialValues.put("ingredients", recipe.getIngredients());
+            initialValues.put("steps", recipe.getSteps());
+            if (recipe.getPhoto() != null) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                recipe.getPhoto().compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] photo = baos.toByteArray();
+                initialValues.put("contactphoto", photo);
+            }
+            initialValues.put("username", recipe.getUsername());
+            didSucceed = database.insert("user", null, initialValues) > 0;
+        }catch (Exception e) {
+            Log.d("My Database", "Something went wrong!");
+        }
+        return didSucceed;
+    }
 
 
 }

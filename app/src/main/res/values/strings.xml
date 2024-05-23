@@ -5,10 +5,10 @@
     <string name="food_photo">food_photo</string>
     <string name="save_the_receipe">save_the_receipe</string>
     <string name="name">Name:</string>
-    <string name="ingridients">Ingridients</string>
+    <string name="ingridients">Ingredients:</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_ingridients">Enter Ingridients</string>
-    <string name="steps">steps</string>
+    <string name="steps">Steps:</string>
     <string name="enter_Steps">Enter Steps</string>
     <string name="delete">Delete</string>
     <string name="add_a_food">Add A Food</string>

@@ -1,5 +1,9 @@
 package com.example.recipeapp2;
 
+import android.graphics.Bitmap;
+
+import java.sql.Blob;
+
 public class Recipe {
 
     private int recipeId;
@@ -7,6 +11,19 @@ public class Recipe {
     private String ingredients;
     private String steps;
     private String username;
+    private Bitmap photo;
+
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
+
+    public Recipe() {
+        recipeId=-1;
+    }
 
     public int getRecipeId() {
         return recipeId;
