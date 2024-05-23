@@ -36,13 +36,28 @@ public class RecipeDataSource  {
         }
     }
 
-    public boolean checkPassword(String password){
+    public boolean checkUsernameAndPassword(String username,String password){
 
         try {
-            String query = "SELECT * FROM user WHERE password = '"+password+"';";
+            String query = "SELECT * FROM user WHERE password = '"+password+"' and username='"+username+"'";
             Cursor cursor = database.rawQuery(query, null);
             cursor.moveToFirst();
             if (cursor.getCount()!=0){
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean checkIfEmptyRecipe(){
+        try {
+            String query = "SELECT * FROM recipe" ;
+            Cursor cursor = database.rawQuery(query, null);
+            cursor.moveToFirst();
+            if (cursor.getCount()==0){
                 cursor.close();
                 return true;
             }

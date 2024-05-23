@@ -16,6 +16,12 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".AddRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllRecipeListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
