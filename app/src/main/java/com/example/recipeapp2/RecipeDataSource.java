@@ -35,6 +35,24 @@ public class RecipeDataSource  {
             return false;
         }
     }
+
+    public boolean checkPassword(String password){
+
+        try {
+            String query = "SELECT * FROM user WHERE password = '"+password+"';";
+            Cursor cursor = database.rawQuery(query, null);
+            cursor.moveToFirst();
+            if (cursor.getCount()!=0){
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public void close(){
         dbHelper.close();
     }

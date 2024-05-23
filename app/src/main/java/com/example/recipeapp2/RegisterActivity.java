@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
         passwordEditText=findViewById(R.id.passwordEditText);
         femaleRadioButton=findViewById(R.id.radioFemale);
         maleRadioButton=findViewById(R.id.radioMale);
+        maleRadioButton.setChecked(true);
         birthdayTextView=findViewById(R.id.textViewBirthday);
         currentUser=new User();
     }
@@ -75,15 +76,26 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
                 try {
                     dataSource.open();
                     if(dataSource.checkAvailabilityOfNewUsername(currentUser.getUsername())){
-                        dataSource.insertUser(currentUser);
-                        dataSource.close();
-                        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+                        if(currentUser.getPassword().length()>5){
+                            if(currentUser.getLastName().length()!=0 && currentUser.getFirstName().length()!=0){
+                                dataSource.insertUser(currentUser);
+                                dataSource.close();
+                                Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(RegisterActivity.this,"Fill empty fields", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            Toast.makeText(RegisterActivity.this,"Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(RegisterActivity.this,"Choose another username", Toast.LENGTH_SHORT).show();
+
                     }
                 }catch (Exception e){
                     dataSource.close();
-                    Toast.makeText(RegisterActivity.this,"Error in creating new account", Toast.LENGTH_SHORT);
+                    Toast.makeText(RegisterActivity.this,"Error in creating new account", Toast.LENGTH_SHORT).show();
                 }
 
             }
