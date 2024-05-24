@@ -22,7 +22,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         int recipeId=getIntent().getIntExtra("recipeID",-1);
         currentRecipe=new Recipe();
         RecipeDataSource dataSource=new RecipeDataSource(this);
-
+//continue getting data of the current recipe and setting text to text views
 
     }
 
