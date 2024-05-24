@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class RecipeDataSource  {
 
@@ -115,4 +118,33 @@ public class RecipeDataSource  {
     }
 
 
+    public ArrayList<Recipe> getAllRecipes() {
+        ArrayList<Recipe> recipes=new ArrayList<>();
+        try{
+            String query="select * from recipe ";
+            Cursor cursor=database.rawQuery(query,null);
+            Recipe newRecipe;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()){
+                newRecipe=new Recipe();
+                newRecipe.setRecipeId(cursor.getInt(0));
+                newRecipe.setRecipeName(cursor.getString(1));
+                newRecipe.setIngredients(cursor.getString(2));
+                newRecipe.setSteps(cursor.getString(3));
+                newRecipe.setUsername(cursor.getString(5));
+                byte[] photo = cursor.getBlob(4);
+                if(photo!=null){
+                    ByteArrayInputStream bais = new ByteArrayInputStream(photo);
+                    Bitmap recipePhoto = BitmapFactory.decodeStream(bais);
+                    newRecipe.setPhoto(recipePhoto);
+                }
+                recipes.add(newRecipe);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }catch (Exception e){
+            recipes=new ArrayList<>();
+        }
+        return recipes;
+    }
 }
