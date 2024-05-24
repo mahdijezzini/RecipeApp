@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SingleRecipeActivity extends AppCompatActivity {
     TextView name,ingredients,steps;
+    Recipe currentRecipe;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe);
@@ -18,6 +19,10 @@ public class SingleRecipeActivity extends AppCompatActivity {
         name=findViewById(R.id.recipeNameTextView);
         steps=findViewById(R.id.recipeStepsTextView);
         ingredients=findViewById(R.id.recipeIngredientsTextView);
+        int recipeId=getIntent().getIntExtra("recipeID",-1);
+        currentRecipe=new Recipe();
+        RecipeDataSource dataSource=new RecipeDataSource(this);
+
 
     }
 
