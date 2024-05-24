@@ -40,4 +40,8 @@
     <string name="firstname">First name:</string>
     <string name="lastname">Last name:</string>
     <string name="enterrecipename">Enter recipe name</string>
+    <string name="recipename">Recipe name:</string>
+    <string name="ingedients">Ingredients:</string>
+    <string name="stepstext">Steps:</string>
+    <string name="recipe_by">Recipe by:</string>
 </resources>

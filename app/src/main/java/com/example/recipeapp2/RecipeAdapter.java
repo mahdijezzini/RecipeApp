@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -31,11 +32,20 @@ public class RecipeAdapter extends RecyclerView.Adapter {
         onItemClickListener=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder)
+                        v.getTag();
+                int position = holder.getAdapterPosition();
+                int recipeId = recipeData.get(position).getRecipeId();
+                Intent intent = new Intent(context,
+                        SingleRecipeActivity.class);
+                intent.putExtra("recipeId", recipeId);
+                context.startActivity(intent);
             }
-        }
+        };
 
     }
+
+
 
     public void setDeleting(boolean deleting) {
         isDeleting = deleting;

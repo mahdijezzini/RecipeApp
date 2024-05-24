@@ -12,6 +12,7 @@ import android.util.Log;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RecipeDataSource  {
 
@@ -146,5 +147,18 @@ public class RecipeDataSource  {
             recipes=new ArrayList<>();
         }
         return recipes;
+    }
+    public Recipe getSpecificRecipe(int recipeId){
+        Recipe recipe = new Recipe();
+        String query = "SELECT * FROM recipe WHERE recipeId = " + recipeId;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            recipe.setRecipeId(recipeId);
+            recipe.setRecipeName(cursor.getString(1));
+            recipe.setIngredients(cursor.getString(2));
+            recipe.setSteps(cursor.getString(3));
+            recipe.setUsername(cursor.getString(4));        }
+        cursor.close();
+        return recipe;
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/include3"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/recipeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/recipename"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recipeNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeTextView"
+        app:layout_constraintStart_toEndOf="@+id/recipeTextView"
+        app:layout_constraintTop_toTopOf="@+id/recipeTextView" />
+
+    <TextView
+        android:id="@+id/recipeIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/ingedients"
+        app:layout_constraintStart_toStartOf="@+id/recipeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/recipeTextView" />
+
+    <TextView
+        android:id="@+id/recipeIngredientsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeIngredients"
+        app:layout_constraintStart_toStartOf="@+id/recipeNameTextView"
+        app:layout_constraintTop_toTopOf="@+id/recipeIngredients" />
+
+    <TextView
+        android:id="@+id/steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/stepstext"
+        app:layout_constraintStart_toStartOf="@+id/recipeIngredients"
+        app:layout_constraintTop_toBottomOf="@+id/recipeIngredients" />
+
+    <TextView
+        android:id="@+id/recipeStepsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/recipeIngredientsTextView"
+        app:layout_constraintTop_toTopOf="@+id/steps" />
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/include3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/recipeByText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="@string/recipe_by"
+        app:layout_constraintBottom_toBottomOf="@+id/usernameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/usernameTextView"
+        app:layout_constraintTop_toTopOf="@+id/usernameTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
