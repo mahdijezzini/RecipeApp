@@ -21,14 +21,19 @@ public class RecipeAdapter extends RecyclerView.Adapter {
     Context context;
     boolean isDeleting;
     private ArrayList<Recipe> recipeData;
+    private View.OnClickListener onItemClickListener;
+
 
     RecipeAdapter(ArrayList<Recipe> recipes, Context context){
-        Log.d("2","2");
-        this.context = context;
-        Log.d("3","3");
 
+        this.context = context;
         recipeData = recipes;
-        Log.d("4",recipes.get(0).getRecipeName());
+        onItemClickListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }
 
     }
 
@@ -40,7 +45,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("0","0");
         View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.complex_list_item, parent, false);        Log.d("0","0");
+                inflate(R.layout.complex_list_item, parent, false);
         Log.d("1","1");
 
         return new RecipeViewHolder(view);
@@ -52,7 +57,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
         recipeVH.getNameTextView().
                 setText(recipeData.get(position).getRecipeName());
         if(recipeData.get(position).getPhoto()!=null){
-
+            recipeVH.getRecipeImage().setImageBitmap(recipeData.get(position).getPhoto());
         }
         if (isDeleting) {
             recipeVH.getDeleteImageButton().setVisibility(View.VISIBLE);
@@ -69,8 +74,9 @@ public class RecipeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return recipeData != null ? recipeData.size() : 0;
     }
+
 
     private void deleteItem(int position) {
 //        RecipeDataSource ds = new RecipeDataSource(context);
