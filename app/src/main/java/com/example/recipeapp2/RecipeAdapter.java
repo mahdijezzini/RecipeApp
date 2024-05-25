@@ -90,21 +90,22 @@ public class RecipeAdapter extends RecyclerView.Adapter {
 
 
     private void deleteItem(int position) {
-//        RecipeDataSource ds = new RecipeDataSource(context);
-//        try {
-//            ds.open();
-//            int contactId = contactData.get(position).getContactID();
-//            boolean didDelete = ds.deleteContact(contactId);
-//            ds.close();
-//            if (didDelete) {
-//                contactData.remove(position);
-//                notifyDataSetChanged();
-//            } else {
-//                Toast.makeText(context, "Delete Failed", Toast.LENGTH_LONG).show();
-//            }
-//        } catch (Exception e) {
-//            Toast.makeText(context, "Delete Failed", Toast.LENGTH_LONG).show();
-//        }
+        RecipeDataSource ds = new RecipeDataSource(context);
+
+        try {
+            ds.open();
+            int recipeId = recipeData.get(position).getRecipeId();
+            boolean didDelete = ds.deleteRecipe(recipeId);
+            ds.close();
+            if (didDelete) {
+                recipeData.remove(position);
+                notifyDataSetChanged();
+            } else {
+                Toast.makeText(context, "Delete Failed", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "Delete Failed", Toast.LENGTH_LONG).show();
+        }
     }
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
 

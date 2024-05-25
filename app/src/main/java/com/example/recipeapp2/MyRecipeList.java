@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 
@@ -23,6 +27,7 @@ public class MyRecipeList extends AppCompatActivity {
     ImageButton list;
     ImageButton myList;
     ImageButton settings;
+    SwitchMaterial deleteSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +35,7 @@ public class MyRecipeList extends AppCompatActivity {
         initLayoutComponents();
         NavButtonsInitializer.initNavButtons( list,   myList, settings,this,getIntent().getStringExtra("username"));
         initRecyclerView();
-
+        initDeleteSwitch();
 
     }
 
@@ -61,6 +66,15 @@ public class MyRecipeList extends AppCompatActivity {
         }
 
     }
+    private void initDeleteSwitch() {
+        deleteSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                adapter.setDeleting(isChecked);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
 
     private void initLayoutComponents() {
         recipesRV = findViewById(R.id.myRecipesRV);
@@ -69,6 +83,8 @@ public class MyRecipeList extends AppCompatActivity {
         myList=findViewById(R.id.myListImageButton);
         settings=findViewById(R.id.settingsImageButton);
         myList.setEnabled(false);
+        deleteSwitch=findViewById(R.id.switchDelete);
+
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

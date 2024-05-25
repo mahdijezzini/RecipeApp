@@ -191,4 +191,14 @@ public class RecipeDataSource  {
         }
         return recipes;
     }
+
+    public boolean deleteRecipe(int recipeId) {
+        boolean deleted;
+        try {
+            deleted = database.delete("recipe", "recipeId=" + recipeId, null) > 0;
+        } catch (Exception e) {
+            deleted = false;
+        }
+        return deleted;
+    }
 }
