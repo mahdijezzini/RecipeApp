@@ -13,13 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddRecipeActivity extends AppCompatActivity {
 
     EditText recipeNameEditText,ingredientsEditText,stepsEditText;
-    ImageButton saveButton;
+    ImageButton saveButton,camera;
     ToggleButton editToggleButton;
     Recipe currentRecipe;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayoutComponents();
+
+    }
+    private void initCamera(){
 
     }
 
@@ -30,6 +33,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         saveButton=findViewById(R.id.imageButtonSave);
         editToggleButton=findViewById(R.id.toggleButtonEdit);
         editToggleButton.setVisibility(View.INVISIBLE);
+        camera=findViewById(R.id.cameraImageButton);
 
         currentRecipe=new Recipe();
         currentRecipe.setUsername(getIntent().getStringExtra("username"));
@@ -40,6 +44,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                 currentRecipe.setRecipeName(recipeNameEditText.getText().toString());
                 currentRecipe.setIngredients(ingredientsEditText.getText().toString());
                 currentRecipe.setSteps(stepsEditText.getText().toString());
+
                 if(     currentRecipe.getRecipeName().length()>1
                         && currentRecipe.getIngredients().length()>1
                         && currentRecipe.getSteps().length()>1
