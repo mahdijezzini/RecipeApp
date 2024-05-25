@@ -201,4 +201,22 @@ public class RecipeDataSource  {
         }
         return deleted;
     }
+
+    public User getSpecificUser(String username) {
+        User user=new User();
+        String query = "SELECT * FROM user WHERE username = '" + username+"'";
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            user.setUsername(username);
+            user.setFirstName(cursor.getString(1));
+            user.setLastName(cursor.getString(2));
+            user.setGender(cursor.getString(3));
+            Calendar birthday = Calendar.getInstance();
+            birthday.setTimeInMillis(Long.parseLong(cursor.getString(4)));
+            user.setDateOfBirth(birthday);
+            user.setPassword(cursor.getString(5));
+        }
+        cursor.close();
+        return user;
+    }
 }

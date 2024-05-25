@@ -48,6 +48,7 @@
             style="@style/Widget.Material3.SearchView.Prefix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="@string/allrecipes"
             android:textColor="@color/design_default_color_primary" />
     </LinearLayout>
