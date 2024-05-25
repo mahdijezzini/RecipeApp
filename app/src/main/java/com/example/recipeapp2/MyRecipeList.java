@@ -1,8 +1,8 @@
 package com.example.recipeapp2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AllRecipeListActivity extends AppCompatActivity {
+public class MyRecipeList extends AppCompatActivity {
 
     ArrayList<Recipe> recipes;
     RecyclerView recipesRV;
@@ -25,10 +25,9 @@ public class AllRecipeListActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_recipe_list);
+        setContentView(R.layout.my_recipe_list);
         initLayoutComponents();
         NavButtonsInitializer.initNavButtons( list,   myList, settings,this);
-
         initRecyclerView();
 
 
@@ -64,11 +63,11 @@ public class AllRecipeListActivity extends AppCompatActivity {
         list=findViewById(R.id.listImageButton);
         myList=findViewById(R.id.myListImageButton);
         settings=findViewById(R.id.settingsImageButton);
-        list.setEnabled(false);
+        myList.setEnabled(false);
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AllRecipeListActivity.this,AddRecipeActivity.class);
+                Intent intent=new Intent(MyRecipeList.this,AddRecipeActivity.class);
                 intent.putExtra("username",getIntent().getStringExtra("username"));
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -76,4 +75,5 @@ public class AllRecipeListActivity extends AppCompatActivity {
         });
 
     }
+
 }

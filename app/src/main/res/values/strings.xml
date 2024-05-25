@@ -44,4 +44,5 @@
     <string name="ingedients">Ingredients:</string>
     <string name="stepstext">Steps:</string>
     <string name="recipe_by">Recipe by:</string>
+    <string name="allrecipes">Recipes</string>
 </resources>

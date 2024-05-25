@@ -4,32 +4,33 @@
     android:id="@+id/navbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black"
+    android:background="@color/design_default_color_primary"
     android:orientation="horizontal">
 
     <ImageButton
-        android:id="@+id/imageButtonList"
+        android:id="@+id/listImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="@color/navbar_background_color"
+        android:backgroundTint="@color/white"
         android:contentDescription="@string/display_list_of_receipe"
         android:src="@drawable/iconlist" />
 
 
     <ImageButton
-        android:id="@+id/imageButtonSettings"
+        android:id="@+id/myListImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="@color/navbar_background_color"
+        android:backgroundTint="@color/white"
         android:contentDescription="@string/display_myreceipe"
         android:src="@drawable/person" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/settingsImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="@color/white"
         app:srcCompat="@drawable/settings" />
 </LinearLayout>

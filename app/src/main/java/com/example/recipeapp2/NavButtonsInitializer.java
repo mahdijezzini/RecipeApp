@@ -33,7 +33,7 @@ public class NavButtonsInitializer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(
-                        context, ProfileActivity.class);
+                        context, MyRecipeList.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
             }

@@ -41,7 +41,16 @@
         app:layout_constraintBottom_toTopOf="@id/recipesRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/allRecipesText"
+            style="@style/Widget.Material3.SearchView.Prefix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/allrecipes"
+            android:textColor="@color/design_default_color_primary" />
+    </LinearLayout>
     <ImageButton
         android:id="@+id/addImageButton"
         android:layout_width="wrap_content"
