@@ -220,10 +220,10 @@ public class RecipeDataSource  {
         return user;
     }
 
-    public boolean updateUser(User user) {
+    public boolean updateUser(User user,String oldUsername) {
         boolean didSucceed = false;
         try {
-            String oldUsername=user.getUsername();
+
             ContentValues updatedValues = new ContentValues();
             updatedValues.put("username", user.getUsername());
             updatedValues.put("firstName", user.getFirstName());
@@ -233,6 +233,9 @@ public class RecipeDataSource  {
             updatedValues.put("password", user.getPassword());
 
             didSucceed = database.update("user", updatedValues, "username = '" + oldUsername+"'", null) > 0;
+            updatedValues = new ContentValues();
+            updatedValues.put("username",user.getUsername());
+            didSucceed = database.update("recipe", updatedValues, "username = '" + oldUsername+"'", null) > 0;
         } catch (Exception ignored) {
         }
         return didSucceed;

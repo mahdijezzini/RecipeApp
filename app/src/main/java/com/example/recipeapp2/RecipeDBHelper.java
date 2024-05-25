@@ -24,7 +24,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
             "steps text, "+
             "recipephoto blob,"+
             "username text, "+
-            "foreign key (username)  references user(username) );";
+            "foreign key (username)  references user(username) on update cascade);";
 
     public RecipeDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -47,4 +47,5 @@
     <string name="allrecipes">Recipes</string>
     <string name="myrecipes">My Recipes</string>
     <string name="save">Save</string>
+    <string name="myaccount">My Account</string>
 </resources>

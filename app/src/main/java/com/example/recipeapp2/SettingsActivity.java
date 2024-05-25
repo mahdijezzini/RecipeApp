@@ -89,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity implements DatePickerDia
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String oldUsername=getIntent().getStringExtra("username");
                 currentUser.setGender(initGender());
                 currentUser.setPassword(passwordEditText.getText().toString());
                 currentUser.setUsername(userNameEditText.getText().toString());
@@ -101,10 +101,14 @@ public class SettingsActivity extends AppCompatActivity implements DatePickerDia
 
                         if(currentUser.getPassword().length()>5){
                             if(currentUser.getLastName().length()!=0 && currentUser.getFirstName().length()!=0){
-                                boolean saved=dataSource.updateUser(currentUser);
+                                boolean saved=dataSource.updateUser(currentUser,oldUsername);
                                 dataSource.close();
                                 if(saved){
                                     Toast.makeText(SettingsActivity.this,"Saved", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(SettingsActivity.this,AllRecipeListActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.putExtra("username",currentUser.getUsername());
+                                    startActivity(intent);
                                 }else{
                                     Toast.makeText(SettingsActivity.this,"Didn't save", Toast.LENGTH_SHORT).show();
                                 }
