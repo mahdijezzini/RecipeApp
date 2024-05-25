@@ -47,7 +47,8 @@ public class AddRecipeActivity extends AppCompatActivity {
                                 int pixels = (int) ((dp * density) + 0.5);
                                 Bitmap scaledPhoto = Bitmap.createScaledBitmap(
                                         photo, pixels, pixels, true);
-                                recipeImage.setImageBitmap(scaledPhoto);
+
+
                                 currentRecipe.setPhoto(scaledPhoto);
                             }
                         }

@@ -108,7 +108,7 @@ public class RecipeDataSource  {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 recipe.getPhoto().compress(Bitmap.CompressFormat.PNG, 100, baos);
                 byte[] photo = baos.toByteArray();
-                initialValues.put("contactphoto", photo);
+                initialValues.put("recipephoto", photo);
             }
             initialValues.put("username", recipe.getUsername());
             didSucceed = database.insert("recipe", null, initialValues) > 0;
