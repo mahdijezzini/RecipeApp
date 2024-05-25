@@ -47,9 +47,10 @@ public class AddRecipeActivity extends AppCompatActivity {
                                 int pixels = (int) ((dp * density) + 0.5);
                                 Bitmap scaledPhoto = Bitmap.createScaledBitmap(
                                         photo, pixels, pixels, true);
-
-
                                 currentRecipe.setPhoto(scaledPhoto);
+                                Log.d("0","0");
+                                recipeImage.setImageBitmap(currentRecipe.getPhoto());
+                                Log.d("1","1");
                             }
                         }
                     });
@@ -69,9 +70,11 @@ public class AddRecipeActivity extends AppCompatActivity {
         editToggleButton=findViewById(R.id.toggleButtonEdit);
         editToggleButton.setVisibility(View.INVISIBLE);
         cameraImageButton=findViewById(R.id.cameraImageButton);
+        recipeImage=findViewById(R.id.recipeImageView);
 
         currentRecipe=new Recipe();
-        currentRecipe.setUsername(getIntent().getStringExtra("username"));
+        String username=getIntent().getStringExtra("username");
+        currentRecipe.setUsername(username);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

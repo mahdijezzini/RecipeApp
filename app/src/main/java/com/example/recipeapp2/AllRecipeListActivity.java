@@ -69,7 +69,8 @@ public class AllRecipeListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(AllRecipeListActivity.this,AddRecipeActivity.class);
-                intent.putExtra("username",getIntent().getStringExtra("username"));
+                String username=getIntent().getStringExtra("username");
+                intent.putExtra("username",username);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

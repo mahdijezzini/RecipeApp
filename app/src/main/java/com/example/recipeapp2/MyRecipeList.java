@@ -50,15 +50,14 @@ public class MyRecipeList extends AppCompatActivity {
             recipes = ds.getMyRecipes(username);
             ds.close();
             if (recipes.size()>0){
-                Log.d("3","3");
                 recipesRV.setLayoutManager(new LinearLayoutManager(this));
-                Log.d("0","0");
                 adapter=new RecipeAdapter(recipes,this);
-                Log.d("1","1");
                 recipesRV.setAdapter(adapter);
             }
             else {
                 Intent intent=new Intent(this, AddRecipeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("username",getIntent().getStringExtra("username"));
                 startActivity(intent);
             }
         } catch (Exception e) {
