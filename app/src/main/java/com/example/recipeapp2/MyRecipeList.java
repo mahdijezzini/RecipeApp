@@ -3,6 +3,7 @@ package com.example.recipeapp2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class MyRecipeList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_recipe_list);
         initLayoutComponents();
-        NavButtonsInitializer.initNavButtons( list,   myList, settings,this);
+        NavButtonsInitializer.initNavButtons( list,   myList, settings,this,getIntent().getStringExtra("username"));
         initRecyclerView();
 
 
@@ -40,11 +41,15 @@ public class MyRecipeList extends AppCompatActivity {
 
         try {
             ds.open();
-            recipes = ds.getAllRecipes();
+            String username=getIntent().getStringExtra("username");
+            recipes = ds.getMyRecipes(username);
             ds.close();
             if (recipes.size()>0){
+                Log.d("3","3");
                 recipesRV.setLayoutManager(new LinearLayoutManager(this));
+                Log.d("0","0");
                 adapter=new RecipeAdapter(recipes,this);
+                Log.d("1","1");
                 recipesRV.setAdapter(adapter);
             }
             else {
@@ -58,7 +63,7 @@ public class MyRecipeList extends AppCompatActivity {
     }
 
     private void initLayoutComponents() {
-        recipesRV = findViewById(R.id.recipesRV);
+        recipesRV = findViewById(R.id.myRecipesRV);
         addImageButton=findViewById(R.id.addImageButton);
         list=findViewById(R.id.listImageButton);
         myList=findViewById(R.id.myListImageButton);

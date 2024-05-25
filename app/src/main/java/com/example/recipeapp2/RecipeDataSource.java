@@ -161,4 +161,34 @@ public class RecipeDataSource  {
         cursor.close();
         return recipe;
     }
+
+    public ArrayList<Recipe> getMyRecipes(String username) {
+        ArrayList<Recipe> recipes=new ArrayList<>();
+        try{
+            String query="select * from recipe where username='"+username+"'";
+            Cursor cursor=database.rawQuery(query,null);
+            Recipe newRecipe;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()){
+                newRecipe=new Recipe();
+                newRecipe.setRecipeId(cursor.getInt(0));
+                newRecipe.setRecipeName(cursor.getString(1));
+                newRecipe.setIngredients(cursor.getString(2));
+                newRecipe.setSteps(cursor.getString(3));
+                newRecipe.setUsername(cursor.getString(5));
+                byte[] photo = cursor.getBlob(4);
+                if(photo!=null){
+                    ByteArrayInputStream bais = new ByteArrayInputStream(photo);
+                    Bitmap recipePhoto = BitmapFactory.decodeStream(bais);
+                    newRecipe.setPhoto(recipePhoto);
+                }
+                recipes.add(newRecipe);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }catch (Exception e){
+            recipes=new ArrayList<>();
+        }
+        return recipes;
+    }
 }

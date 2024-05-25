@@ -27,7 +27,7 @@ public class AllRecipeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_recipe_list);
         initLayoutComponents();
-        NavButtonsInitializer.initNavButtons( list,   myList, settings,this);
+        NavButtonsInitializer.initNavButtons( list,   myList, settings,this,getIntent().getStringExtra("username"));
 
         initRecyclerView();
 

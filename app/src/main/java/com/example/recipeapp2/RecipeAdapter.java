@@ -32,7 +32,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
         onItemClickListener=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("0","0");
+
                 RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder)
                         v.getTag();
                 int position = holder.getAdapterPosition();

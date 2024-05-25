@@ -8,13 +8,14 @@ import android.widget.ImageButton;
 
 public class NavButtonsInitializer {
 
-    public static void initNavButtons(ImageButton list,  ImageButton myList,ImageButton settings, Context context) {
+    public static void initNavButtons(ImageButton list,  ImageButton myList,ImageButton settings, Context context,String username) {
         list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(
                         context, AllRecipeListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("username",username);
                 context.startActivity(intent);
             }
         });
@@ -25,6 +26,7 @@ public class NavButtonsInitializer {
                 Intent intent = new Intent(
                         context, SettingsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("username",username);
                 context.startActivity(intent);
             }
         });
@@ -35,6 +37,7 @@ public class NavButtonsInitializer {
                 Intent intent = new Intent(
                         context, MyRecipeList.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("username",username);
                 context.startActivity(intent);
             }
         });
