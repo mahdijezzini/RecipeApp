@@ -1,30 +1,64 @@
 package com.example.recipeapp2;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class AddRecipeActivity extends AppCompatActivity {
 
+
+    final int PERMISSION_REQUEST_CAMERA = 103;
     EditText recipeNameEditText,ingredientsEditText,stepsEditText;
-    ImageButton saveButton,camera;
+    ImageButton saveButton,cameraImageButton;
     ToggleButton editToggleButton;
     Recipe currentRecipe;
+    ImageView recipeImage;
+    ActivityResultLauncher<Intent> activityResultLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            if (result.getResultCode() == RESULT_OK) {
+                                Intent data = result.getData();
+                                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                                float density = AddRecipeActivity.this.getResources().getDisplayMetrics().density;
+                                int dp = 140;
+                                int pixels = (int) ((dp * density) + 0.5);
+                                Bitmap scaledPhoto = Bitmap.createScaledBitmap(
+                                        photo, pixels, pixels, true);
+                                recipeImage.setImageBitmap(scaledPhoto);
+                                currentRecipe.setPhoto(scaledPhoto);
+                            }
+                        }
+                    });
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLayoutComponents();
-
+        initCameraButton();
     }
-    private void initCamera(){
 
-    }
 
     private void initLayoutComponents() {
         recipeNameEditText=findViewById(R.id.recipeNameEditText);
@@ -33,7 +67,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         saveButton=findViewById(R.id.imageButtonSave);
         editToggleButton=findViewById(R.id.toggleButtonEdit);
         editToggleButton.setVisibility(View.INVISIBLE);
-        camera=findViewById(R.id.cameraImageButton);
+        cameraImageButton=findViewById(R.id.cameraImageButton);
 
         currentRecipe=new Recipe();
         currentRecipe.setUsername(getIntent().getStringExtra("username"));
@@ -66,4 +100,41 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
     }
+    private void initCameraButton() {
+        cameraImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(AddRecipeActivity.this,
+                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    takePhoto();
+                } else {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            AddRecipeActivity.this, Manifest.permission.CAMERA)) {
+                        Snackbar.make(findViewById(R.id.activity_main),
+                                        "The app needs permission to take photo",
+                                        Snackbar.LENGTH_INDEFINITE)
+                                .setAction("Ok", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Log.d("MainActivity Camera permission", "");
+                                        ActivityCompat.requestPermissions(AddRecipeActivity.this,
+                                                new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+                                    }
+                                }).show();
+                    } else {
+                        Log.d("MainActivity Camera permission", "");
+                        ActivityCompat.requestPermissions(AddRecipeActivity.this,
+                                new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+                    }
+                }
+            }
+        });
+    }
+
+    private void takePhoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        activityResultLauncher.launch(intent);
+    }
+
+
 }
