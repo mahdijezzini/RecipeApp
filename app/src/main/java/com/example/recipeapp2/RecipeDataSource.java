@@ -219,4 +219,22 @@ public class RecipeDataSource  {
         cursor.close();
         return user;
     }
+
+    public boolean updateUser(User user) {
+        boolean didSucceed = false;
+        try {
+            String oldUsername=user.getUsername();
+            ContentValues updatedValues = new ContentValues();
+            updatedValues.put("username", user.getUsername());
+            updatedValues.put("firstName", user.getFirstName());
+            updatedValues.put("lastName", user.getLastName());
+            updatedValues.put("gender", user.getGender());
+            updatedValues.put("dateofbirth", user.getDateOfBirth().getTimeInMillis());
+            updatedValues.put("password", user.getPassword());
+
+            didSucceed = database.update("user", updatedValues, "username = '" + oldUsername+"'", null) > 0;
+        } catch (Exception ignored) {
+        }
+        return didSucceed;
+    }
 }

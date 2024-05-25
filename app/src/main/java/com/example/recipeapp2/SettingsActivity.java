@@ -1,5 +1,6 @@
 package com.example.recipeapp2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -8,13 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements DatePickerDialog.SaveDateListener {
     ImageButton list;
     ImageButton myList;
     ImageButton settings;
@@ -87,8 +89,36 @@ public class SettingsActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initGender();
 
+                currentUser.setGender(initGender());
+                currentUser.setPassword(passwordEditText.getText().toString());
+                currentUser.setUsername(userNameEditText.getText().toString());
+                currentUser.setLastName(lastNameEditText.getText().toString());
+                currentUser.setFirstName(firstNameEditText.getText().toString());
+                RecipeDataSource dataSource=new RecipeDataSource(SettingsActivity.this);
+                try {
+                    dataSource.open();
+
+                        if(currentUser.getPassword().length()>5){
+                            if(currentUser.getLastName().length()!=0 && currentUser.getFirstName().length()!=0){
+                                boolean saved=dataSource.updateUser(currentUser);
+                                dataSource.close();
+                                if(saved){
+                                    Toast.makeText(SettingsActivity.this,"Saved", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(SettingsActivity.this,"Didn't save", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                Toast.makeText(SettingsActivity.this,"Fill empty fields", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            Toast.makeText(SettingsActivity.this,"Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                        }
+
+                }catch (Exception e){
+                    dataSource.close();
+                    Toast.makeText(SettingsActivity.this,"Error in creating new account", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
