@@ -30,6 +30,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         saveButton=findViewById(R.id.imageButtonSave);
         editToggleButton=findViewById(R.id.toggleButtonEdit);
         editToggleButton.setVisibility(View.INVISIBLE);
+
         currentRecipe=new Recipe();
         currentRecipe.setUsername(getIntent().getStringExtra("username"));
         saveButton.setOnClickListener(new View.OnClickListener() {

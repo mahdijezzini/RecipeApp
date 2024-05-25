@@ -26,7 +26,9 @@ public class AllRecipeListActivity extends AppCompatActivity {
         initLayoutComponents();
         initRecyclerView();
 
+
     }
+
 
     private void initRecyclerView() {
         RecipeDataSource ds = new RecipeDataSource(this);
