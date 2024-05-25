@@ -157,7 +157,7 @@ public class RecipeDataSource  {
             recipe.setRecipeName(cursor.getString(1));
             recipe.setIngredients(cursor.getString(2));
             recipe.setSteps(cursor.getString(3));
-            recipe.setUsername(cursor.getString(4));        }
+            recipe.setUsername(cursor.getString(5));        }
         cursor.close();
         return recipe;
     }

@@ -3,6 +3,8 @@ package com.example.recipeapp2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ public class AllRecipeListActivity extends AppCompatActivity {
     ArrayList<Recipe> recipes;
     RecyclerView recipesRV;
     RecipeAdapter adapter;
+    ImageButton addImageButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,16 @@ public class AllRecipeListActivity extends AppCompatActivity {
 
     private void initLayoutComponents() {
         recipesRV = findViewById(R.id.recipesRV);
+        addImageButton=findViewById(R.id.addImageButton);
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AllRecipeListActivity.this,AddRecipeActivity.class);
+                intent.putExtra("username",getIntent().getStringExtra("username"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
     }
 }

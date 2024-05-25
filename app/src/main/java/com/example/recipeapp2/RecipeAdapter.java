@@ -32,6 +32,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
         onItemClickListener=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("0","0");
                 RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder)
                         v.getTag();
                 int position = holder.getAdapterPosition();
@@ -39,6 +40,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
                 Intent intent = new Intent(context,
                         SingleRecipeActivity.class);
                 intent.putExtra("recipeId", recipeId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
             }
         };
@@ -53,10 +55,9 @@ public class RecipeAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("0","0");
+
         View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.complex_list_item, parent, false);
-        Log.d("1","1");
 
         return new RecipeViewHolder(view);
     }
@@ -117,6 +118,7 @@ public class RecipeAdapter extends RecyclerView.Adapter {
             recipeImage = itemView.findViewById(R.id.recipeImage);
             deleteImageButton=itemView.findViewById(R.id.imageButtonDelete);
             itemView.setTag(this);
+            itemView.setOnClickListener(onItemClickListener);
 
         }
 
